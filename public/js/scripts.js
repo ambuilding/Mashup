@@ -83,7 +83,7 @@ function addMarker(place)
         if (info.marker != marker) {
             populateInfoWindow(place, marker);
         }
-        
+
     });
 
     markers.push(marker);
@@ -120,7 +120,7 @@ function configure()
         source: search,
         templates: {
             empty: "no places found yet",
-            suggestion: _.template("<p>TODO</p>")
+            suggestion: _.template("<p><%- place_name %>, <%- admin_name1 %>, <%- postal_code %></p>")
         }
     });
 
@@ -146,8 +146,8 @@ function configure()
     // re-enable ctrl- and right-clicking (and thus Inspect Element) on Google Map
     // https://chrome.google.com/webstore/detail/allow-right-click/hompjdfbfmmmgflfjdlnkohcplmboaeo?hl=en
     document.addEventListener("contextmenu", function(event) {
-        event.returnValue = true; 
-        event.stopPropagation && event.stopPropagation(); 
+        event.returnValue = true;
+        event.stopPropagation && event.stopPropagation();
         event.cancelBubble && event.cancelBubble();
     }, true);
 
@@ -190,7 +190,7 @@ function articles(data) {
         articles += template ({
             link: data[i].link,
             title: data[i].title
-        });                
+        });
     }
     return articles += "</ul>";
 }
@@ -261,7 +261,7 @@ function showInfo(marker, content)
 /**
  * Updates UI's markers.
  */
-function update() 
+function update()
 {
     // get map's bounds
     var bounds = map.getBounds();
