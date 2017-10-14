@@ -22,7 +22,7 @@
 
         // (soon-to-be numerically indexed) array of articles
         $articles = [];
-        
+
         // headers for proxy servers
         $headers = [
             "Accept" => "*/*",
@@ -31,7 +31,9 @@
         ];
         $context = stream_context_create([
             "http" => [
-                "header" => implode(array_map(function($value, $key) { return sprintf("%s: %s\r\n", $key, $value); }, $headers, array_keys($headers))),
+                "header" => implode(array_map(function($value, $key) {
+                    return sprintf("%s: %s\r\n", $key, $value);
+                }, $headers, array_keys($headers))),
                 "method" => "GET"
             ]
         ]);
@@ -65,7 +67,7 @@
                 ];
             }
         }
-        
+
         // else from the Onion
         else
         {

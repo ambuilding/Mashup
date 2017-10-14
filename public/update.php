@@ -27,12 +27,28 @@
     if ($sw_lng <= $ne_lng)
     {
         // doesn't cross the antimeridian
-        $rows = CS50::query("SELECT country_code, place_name, admin_code1, postal_code, latitude, longitude FROM places WHERE ? <= latitude AND latitude <= ? AND (? <= longitude AND longitude <= ?) GROUP BY country_code, place_name, admin_code1, postal_code, latitude, longitude ORDER BY RAND() LIMIT 10", $sw_lat, $ne_lat, $sw_lng, $ne_lng);
+        $rows = CS50::query("
+            SELECT country_code, place_name, admin_code1, postal_code, latitude, longitude
+            FROM places
+            WHERE ? <= latitude AND latitude <= ? AND (? <= longitude AND longitude <= ?)
+            GROUP BY country_code, place_name, admin_code1, postal_code, latitude, longitude
+            ORDER BY RAND()
+            LIMIT 10",
+            $sw_lat, $ne_lat, $sw_lng, $ne_lng
+        );
     }
     else
     {
         // crosses the antimeridian
-        $rows = CS50::query("SELECT country_code, place_name, admin_code1, postal_code, latitude, longitude FROM places WHERE ? <= latitude AND latitude <= ? AND (? <= longitude OR longitude <= ?) GROUP_BY country_code, place_name, admin_code1, postal_code, latitude, longitude ORDER BY RAND() LIMIT 10", $sw_lat, $ne_lat, $sw_lng, $ne_lng);
+        $rows = CS50::query("
+            SELECT country_code, place_name, admin_code1, postal_code, latitude, longitude
+            FROM places
+            WHERE ? <= latitude AND latitude <= ? AND (? <= longitude OR longitude <= ?)
+            GROUP BY country_code, place_name, admin_code1, postal_code, latitude, longitude
+            ORDER BY RAND()
+            LIMIT 10",
+            $sw_lat, $ne_lat, $sw_lng, $ne_lng
+        );
     }
 
     // output places as JSON (pretty-printed for debugging convenience)

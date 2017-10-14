@@ -112,7 +112,7 @@ function configure()
     // configure typeahead
     // https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md
     $("#q").typeahead({
-        autoselect: true,
+        // autoselect: true,
         highlight: true,
         minLength: 1
     },
